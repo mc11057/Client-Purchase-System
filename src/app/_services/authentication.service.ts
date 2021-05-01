@@ -27,8 +27,8 @@ export class AuthenticationService {
                 {   
                     // store jwt token in local storage to add the token in the next requests              
                     localStorage.setItem('token', JSON.stringify(response.headers.get('Authorization')));
-
                 }
+              
 
             }),mergeMap(()=> this.getUser(username)));
     }

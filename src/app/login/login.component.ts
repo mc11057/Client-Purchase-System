@@ -5,10 +5,14 @@ import { first } from 'rxjs/operators';
 
 import { AuthenticationService } from '../_services/authentication.service';
 
-@Component({ templateUrl: 'login.component.html' })
+
+@Component({
+     templateUrl: 'login.component.html', 
+     styleUrls: ['login.css']
+    })
 export class LoginComponent implements OnInit {
+    hide = true;
     loginForm: FormGroup;
-    loading = false;
     submitted = false;
     returnUrl: string;
     error = '';
@@ -46,7 +50,6 @@ export class LoginComponent implements OnInit {
             return;
         }
 
-        this.loading = true;
         this.authenticationService.login(this.f.username.value, this.f.password.value)
             .pipe(first())
             .subscribe(
@@ -54,8 +57,7 @@ export class LoginComponent implements OnInit {
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
-                    this.error = error;
-                    this.loading = false;
+                    this.error = 'Ocurrió un error';
                 });
     }
 }

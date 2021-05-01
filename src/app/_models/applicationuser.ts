@@ -1,7 +1,8 @@
+import { UserRole } from "./user_role";
+
 export class ApplicationUser {
     id: number;
     username: string;
     password: string;
-    firstName: string;
-    lastName: string;
+    roles: Array<UserRole>;
 }
