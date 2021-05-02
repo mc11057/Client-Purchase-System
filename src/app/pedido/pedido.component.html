@@ -1,7 +1,7 @@
 <hr>
 <h1>Pedidos</h1>
 <div class="d-flex justify-content-end"> 
-<button type="button" class="btn btn-success"><span class="btn-label"><i class="fa fa-plus"></i></span> Crear Pedido</button>
+<button type="button" class="btn btn-success" (click)="crearPedido()"><span class="btn-label"><i class="fa fa-plus" ></i></span> Crear Pedido</button>
 </div>
 <table class="table">
     <thead>
@@ -14,16 +14,20 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Carlos Martínez</td>
-        <td>Creado</td>
-        <td><button type="button" class="btn btn-primary"><i class="fa fa-eye"></i></button></td>
-        <td>
-            <button type="button" class="btn btn-success"><i class="fa fa-check"></i></button>
-            /
-            <button type="button" class="btn btn-danger"><i class="fa fa-close"></i></button>
-        </td>
-      </tr>
+      
+        <ng-container *ngFor="let pedido of pedidos;let i=index;">
+        <tr>
+          <td scope="row">{{i+1}}</td>
+          <td>{{pedido.empleado.primerNombre}}</td>
+          <td>{{pedido.progresoPedido.estadoPedido}}</td>
+          <td><button type="button" class="btn btn-primary" (click)="verProductos(pedido.pedidoId)"><i class="fa fa-eye"></i></button></td>
+          <td>
+              <button type="button" class="btn btn-success" (click)="aprobarPedido(pedido.pedidoId)"><i class="fa fa-check"></i></button>
+              /
+              <button type="button" class="btn btn-danger" (click)="denegarPedido(pedido.pedidoId)"><i class="fa fa-close"></i></button>
+          </td>
+        </tr>
+        </ng-container>
+      
     </tbody>
   </table>
