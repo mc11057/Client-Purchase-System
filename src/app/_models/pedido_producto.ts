@@ -5,7 +5,6 @@ import { Producto } from "./producto";
 export class PedidoProducto {
     id: PedidoProductoKey
     pedido:Pedido;
-    producto:Producto
-
-
+    producto:Producto;
+    cantidad;
 }

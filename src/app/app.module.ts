@@ -14,6 +14,8 @@ import {ErrorInterceptor} from './_helpers/error.interceptor'
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { PedidoComponent } from './pedido/pedido.component';
+import { PedidoDetailComponent } from './pedido-detail/pedido-detail.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -24,13 +26,15 @@ import { PedidoComponent } from './pedido/pedido.component';
       BrowserModule,
       ReactiveFormsModule,
       HttpClientModule,
-      AppRoutingModule
+      AppRoutingModule,
+      NgbModule
   ],
   declarations: [
       AppComponent,
       HomeComponent,
       LoginComponent,
-      PedidoComponent
+      PedidoComponent,
+      PedidoDetailComponent
   ],
   providers: [
       { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

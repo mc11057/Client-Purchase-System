@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { PedidoService } from '../_services/pedido.service';
 import { first } from 'rxjs/operators';
 import {Pedido} from '../_models/pedido';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+
+
 
 @Component({
   selector: 'app-pedido',
@@ -10,7 +13,9 @@ import {Pedido} from '../_models/pedido';
 })
 export class PedidoComponent implements OnInit {
   pedidos:Array<Pedido>;
-  constructor(private pedidoService: PedidoService) { }
+  pedidoIdSelected:number;
+  closeModal: string;
+  constructor(private pedidoService: PedidoService,private modalService: NgbModal) { }
 
   ngOnInit(): void {
    this.pedidoService.getOrders().pipe(first())
@@ -21,13 +26,13 @@ export class PedidoComponent implements OnInit {
         error => { 
         });
   }
+  changePedidoIdSelected(pedidoId:number){
+    this.pedidoIdSelected = pedidoId;
+  }
   crearPedido(){
     //crear componente para crear pedido
   }
-  verProductos(pedidoId:number){
-   //crear componente y ver los productos del pedido
-    console.log(pedidoId);
-  }
+
   aprobarPedido(pedidoId:number){
     //ejecutar el proc almacenado
     console.log(pedidoId);
@@ -36,5 +41,24 @@ export class PedidoComponent implements OnInit {
     //cambiar estado a denegado
     console.log(pedidoId);
   }
+  triggerModal(content:any,pedidoId:number) {
+    this.changePedidoIdSelected(pedidoId);
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((res) => {
+      this.closeModal = `Closed with: ${res}`;
+    }, (res) => {
+      this.closeModal = `Dismissed ${this.getDismissReason(res)}`;
+    });
+  }
+  
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+ 
 
 }

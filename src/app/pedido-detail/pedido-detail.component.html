@@ -1,0 +1,21 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Id Producto</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Cantidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let lineItem of lineItems| keyvalue;let i=index;;" >
+            <tr>
+                <td scope="row">{{i+1}}</td>
+                <td>{{lineItem.value.productoId}}</td>
+                <td>{{lineItem.value.nombre}}</td>
+                <td scope="row">{{lineItem.key}}</td>
+            </tr>
+        </ng-container>
+
+    </tbody>
+</table>
