@@ -1,26 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Pedido } from '../_models/pedido';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
+import { Empleado } from '../_models/empleado';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PedidoService {
+export class EmpleadoService {
 
   constructor(private http: HttpClient) { }
 
-  getOrders() {
-    return this.http.get<Array<Pedido>>(`${environment.apiUrl}/app/v1/pedido` )
+  getEmployeeByUserID(userId:number) {
+    return this.http.get<Empleado>(`${environment.apiUrl}/app/v1/empleado/porUsuario/${userId}` )
         .pipe(map(pedido => {
             return pedido;  
         }));
-}
-guardarPedido(pedido:Pedido) {
-  return this.http.post<any>(`${environment.apiUrl}/app/v1/pedido`,pedido )
-      .pipe(map(response => {
-          return response;  
-      }));
 }
 }

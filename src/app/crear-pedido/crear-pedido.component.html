@@ -1,0 +1,89 @@
+<p>Seleccione la categoría</p>
+<div class="dropdown">
+    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        Categoría
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <ng-container *ngFor="let categoria of categorias;">
+            <li><a class="dropdown-item"
+                    (click)="categoriaSeleccionada(categoria.categoriaProductoId)">{{categoria.nombre}}</a></li>
+        </ng-container>
+    </ul>
+</div>
+<div *ngIf="categoriaSelected">Categoría Seleccionada: {{categoriaSelected.nombre}}</div>
+
+<div *ngIf="productosPorCategoriaSeleccionada">
+    <p>Productos</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Tipo de Producto</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Agregar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let producto of productosPorCategoriaSeleccionada;let i=index;">
+                <tr>
+                    <td scope="row">{{i+1}}</td>
+                    <td>{{producto.nombre}}</td>
+                    <td>{{producto.tipoProducto.tipo}}</td>
+                    <td>
+                        <input class="form-control"  [(ngModel)]="cantidad" type="number" min="1" value="1" id="example-number-input">
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success"  (click)="agregarProducto(producto)"><i class="fa fa-check"></i></button>
+                    </td>
+                </tr>
+            </ng-container>
+
+        </tbody>
+    </table>
+</div>
+<div *ngIf="pedidoProductos.length">
+    <p>Orden de compra</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Remover</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let pedidoProducto of pedidoProductos;let i=index;">
+                <tr>
+                    <td scope="row">{{i+1}}</td>
+                    <td>{{pedidoProducto.producto.nombre}}</td>
+                    <td>{{pedidoProducto.cantidad}}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger" (click)="eliminarProducto(pedidoProducto)"><i class="fa fa-close"></i></button>
+                    </td>
+                </tr>
+            </ng-container>
+
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-primary"  (click)="triggerModal(modalData)">Crear Pedido</button>
+
+</div>
+
+<ng-template #modalData let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">¿Confirma enviar el pedido?</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <button type="button" class="btn btn-success acept"  (click)="crearPedido()">Aceptar</button>
+        <button type="button" class="btn btn-danger"  (click)="modal.close('Save click')">Cancelar</button>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Close</button>
+    </div>
+  </ng-template>

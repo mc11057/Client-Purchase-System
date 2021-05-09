@@ -3,6 +3,8 @@ import { PedidoService } from '../_services/pedido.service';
 import { first } from 'rxjs/operators';
 import {Pedido} from '../_models/pedido';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Router } from '@angular/router';
+
 
 
 
@@ -15,7 +17,8 @@ export class PedidoComponent implements OnInit {
   pedidos:Array<Pedido>;
   pedidoIdSelected:number;
   closeModal: string;
-  constructor(private pedidoService: PedidoService,private modalService: NgbModal) { }
+  constructor(private pedidoService: PedidoService,private modalService: NgbModal,
+    private router: Router ) { }
 
   ngOnInit(): void {
    this.pedidoService.getOrders().pipe(first())
@@ -30,7 +33,7 @@ export class PedidoComponent implements OnInit {
     this.pedidoIdSelected = pedidoId;
   }
   crearPedido(){
-    //crear componente para crear pedido
+    this.router.navigate(['/crear-pedido'])
   }
 
   aprobarPedido(pedidoId:number){

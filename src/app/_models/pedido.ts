@@ -4,7 +4,7 @@ import { ProgresoPedido } from "./progreso_pedido";
 
 export class Pedido {
     pedidoId: number;
-    pedidos: Array<PedidoProducto>;
+    productos: Array<PedidoProducto>;
     progresoPedido:ProgresoPedido;
     empleado:Empleado;
 

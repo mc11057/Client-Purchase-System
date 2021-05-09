@@ -16,6 +16,9 @@ import { LoginComponent } from './login/login.component';
 import { PedidoComponent } from './pedido/pedido.component';
 import { PedidoDetailComponent } from './pedido-detail/pedido-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CrearPedidoComponent } from './crear-pedido/crear-pedido.component';
+import { FormsModule } from '@angular/forms';
+
 
 
 
@@ -27,14 +30,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       ReactiveFormsModule,
       HttpClientModule,
       AppRoutingModule,
-      NgbModule
+      NgbModule,
+      FormsModule
+      
   ],
   declarations: [
       AppComponent,
       HomeComponent,
       LoginComponent,
       PedidoComponent,
-      PedidoDetailComponent
+      PedidoDetailComponent,
+      CrearPedidoComponent
   ],
   providers: [
       { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

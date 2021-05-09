@@ -6,5 +6,5 @@ export class PedidoProducto {
     id: PedidoProductoKey
     pedido:Pedido;
     producto:Producto;
-    cantidad;
+    cantidad:number;
 }

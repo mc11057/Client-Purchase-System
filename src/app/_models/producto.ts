@@ -1,4 +1,5 @@
 import { PedidoProducto } from "./pedido_producto";
+import { TipoProducto } from "./tipo_producto";
 
 export class Producto {
     productoId: number;
@@ -7,6 +8,6 @@ export class Producto {
     categoriaProductoId: number;
     producto: Array<PedidoProducto>;
     nombre: string;
-    tipoProductoId: number;
+    tipoProducto: TipoProducto;
 
 }
