@@ -25,7 +25,8 @@ export class CrearPedidoComponent implements OnInit {
   pedidoProductos: Array<PedidoProducto> = new Array();
   cantidad: number = 1;
   closeModal: string;
-
+  loading = false;
+  productosLoading = false;
 
   constructor(private productoService: ProductoService,
     private categoriaService: CategoriaProductoService,
@@ -45,6 +46,7 @@ export class CrearPedidoComponent implements OnInit {
         });
   }
   categoriaSeleccionada(categoriaId: number) {
+    this.productosLoading = true;
     let categoriaFounded = this.categorias.find(categoria => categoria.categoriaProductoId == categoriaId);
     this.categoriaSelected = categoriaFounded!;
     this.productoService.findByCategory(categoriaId)
@@ -52,6 +54,8 @@ export class CrearPedidoComponent implements OnInit {
       .subscribe(
         data => {
           this.productosPorCategoriaSeleccionada = data;
+          this.productosLoading = false;
+
         },
         error => {
           console.log(error);
@@ -113,6 +117,7 @@ export class CrearPedidoComponent implements OnInit {
     }
   }
   crearPedido() {
+    this.loading = true;
     let pedido: Pedido = new Pedido;
     pedido.productos = this.pedidoProductos;
     let user: ApplicationUser = JSON.parse(localStorage.getItem('currentUser')!);
@@ -125,6 +130,7 @@ export class CrearPedidoComponent implements OnInit {
             .pipe(first())
             .subscribe(
               data => {
+                this.loading = false;
                 this.modalService.dismissAll();
                 this.router.navigate(['/pedidos'])
               },

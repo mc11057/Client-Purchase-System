@@ -17,6 +17,7 @@ export class PedidoComponent implements OnInit {
   pedidos:Array<Pedido>;
   pedidoIdSelected:number;
   closeModal: string;
+  loading=true;
   constructor(private pedidoService: PedidoService,private modalService: NgbModal,
     private router: Router ) { }
 
@@ -24,6 +25,7 @@ export class PedidoComponent implements OnInit {
    this.pedidoService.getOrders().pipe(first())
     .subscribe(
         data => {
+          this.loading=false;
           this.pedidos = data;
         },
         error => { 

@@ -15,7 +15,7 @@ export class PedidoDetailComponent implements OnInit {
   cantidades: Array<number> = new Array();
   pedidoProductos : Array<PedidoProducto>;
   lineItems = new Map();
-
+  loading=true;
   
   @Input() pedidoId: number; 
   constructor(private pedidoDetailService:PedidoDetailService) { }
@@ -24,7 +24,8 @@ export class PedidoDetailComponent implements OnInit {
     this.pedidoDetailService.getProductsbyPedidoId(this.pedidoId)
     .pipe(first())
     .subscribe(
-        data => {          
+        data => {         
+          this.loading=false; 
           this.pedidoProductos = data;
           for(let pedidoProducto of this.pedidoProductos)
           {

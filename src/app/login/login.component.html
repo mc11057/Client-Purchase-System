@@ -1,14 +1,18 @@
-
 <div class="wrapper fadeInDown">
-    <legend align="center">Sistema de compras</legend>
-    <div id="formContent">
-      <!-- Tabs Titles -->
-  
-      <!-- Login Form -->
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
-        <input type="text" id="login" formControlName="username" class="fadeIn second" name="login" placeholder="Nombre de usuario">
-        <input type="password" id="password" formControlName="password" class="fadeIn third" name="login" placeholder="Contraseña">
-        <input type="submit" class="fadeIn fourth" value="Entrar">
-      </form>
-    </div>
+  <legend align="center">Sistema de compras</legend>
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Login Form -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" (click)="changeLoading()">
+      <input type="text" id="login" formControlName="username" class="fadeIn second" name="login"
+        placeholder="Nombre de usuario">
+      <input type="password" id="password" formControlName="password" class="fadeIn third" name="login"
+        placeholder="Contraseña">
+      <input type="submit" class="fadeIn fourth" value="Entrar">
+      <div *ngIf="loading" class="spinner-border text-info" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </form>
   </div>
+</div>
