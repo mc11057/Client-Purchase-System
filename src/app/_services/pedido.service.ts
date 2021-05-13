@@ -32,8 +32,8 @@ aprobarPedido(pedidoId: number){
 }));
 }
 
-denegarPedido(pedido:Pedido){
-  return this.http.put<any>(`${environment.apiUrl}/app/v1/pedido/denegar/`, pedido)
+denegarPedido(pedidoId: number){
+  return this.http.put<any>(`${environment.apiUrl}/app/v1/pedido/denegar/`, pedidoId)
   .pipe(map(response => {
     return response;  
 }));

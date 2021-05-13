@@ -46,13 +46,13 @@ export class PedidoComponent implements OnInit {
 
     console.log(pedidoId);
   }
-  denegarPedido(pedido:Pedido){
+  denegarPedido(pedidoId:number){
     //cambiar estado a denegado
-    this.pedidoService.denegarPedido(pedido).subscribe(
+    this.pedidoService.denegarPedido(pedidoId).subscribe(
 
       );
       this.ngOnInit();
-    console.log(pedido);
+    console.log(pedidoId);
   }
   triggerModal(content:any,pedidoId:number) {
     this.changePedidoIdSelected(pedidoId);
