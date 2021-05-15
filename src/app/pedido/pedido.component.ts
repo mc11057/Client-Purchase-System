@@ -40,10 +40,18 @@ export class PedidoComponent implements OnInit {
 
   aprobarPedido(pedidoId:number){
     //ejecutar el proc almacenado
+    this.pedidoService.aprobarPedido(pedidoId).subscribe(
+
+    );
+
     console.log(pedidoId);
   }
   denegarPedido(pedidoId:number){
     //cambiar estado a denegado
+    this.pedidoService.denegarPedido(pedidoId).subscribe(
+
+      );
+      this.ngOnInit();
     console.log(pedidoId);
   }
   triggerModal(content:any,pedidoId:number) {

@@ -4,6 +4,7 @@ import { Pedido } from '../_models/pedido';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -23,4 +24,20 @@ guardarPedido(pedido:Pedido) {
           return response;  
       }));
 }
+
+aprobarPedido(pedidoId: number){
+  return this.http.put<any>(`${environment.apiUrl}/app/v1/pedido/aprobar/${pedidoId}`, pedidoId)
+  .pipe(map(response => {
+    return response;  
+}));
+}
+
+denegarPedido(pedidoId: number){
+  return this.http.put<any>(`${environment.apiUrl}/app/v1/pedido/denegar/`, pedidoId)
+  .pipe(map(response => {
+    return response;  
+}));
+}
+
+
 }
