@@ -36,10 +36,10 @@
                     <td>{{producto.nombre}}</td>
                     <td>{{producto.tipoProducto.tipo}}</td>
                     <td>
-                        <input class="form-control"  [(ngModel)]="cantidad" type="number" min="1" value="1" id="example-number-input">
+                        <input class="form-control"  [(ngModel)]="cantidad[i]" type="number" min="1" value="1" id="example-number-input">
                     </td>
                     <td>
-                        <button type="button" class="btn btn-success"  (click)="agregarProducto(producto)"><i class="fa fa-check"></i></button>
+                        <button type="button" class="btn btn-success"  (click)="agregarProducto(producto,i)"><i class="fa fa-check"></i></button>
                     </td>
                 </tr>
             </ng-container>
@@ -84,15 +84,15 @@
       </button>
     </div>
     <div class="modal-body">
-        <button type="button" class="btn btn-success acept"  (click)="crearPedido()">
+        <button type="button" class="btn btn-success acept"  [disabled]="clicked"  (click)="crearPedido(); clicked = true">
             Aceptar
         </button>
-        <button type="button" class="btn btn-danger cancel"  (click)="modal.close('Save click')">Cancelar</button>
+        <button type="button" class="btn btn-danger cancel" [disabled]="clicked" (click)="modal.close('Save click')">Cancelar</button>
         <div *ngIf="loading" class="spinner-border text-success" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Close</button>
+      <button type="button" class="btn btn-danger" [disabled]="clicked" (click)="modal.close('Save click')">Close</button>
     </div>
   </ng-template>

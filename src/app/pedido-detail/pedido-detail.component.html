@@ -1,6 +1,4 @@
-<div *ngIf="loading" class="spinner-border text-info" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
+
 <table class="table">
     <thead>
         <tr>
@@ -11,12 +9,12 @@
         </tr>
     </thead>
     <tbody>
-        <ng-container *ngFor="let lineItem of lineItems | keyvalue;let i=index;;" >
+        <ng-container *ngFor="let pedidoProducto of pedidoProductos;let i=index;;" >
             <tr>
                 <td scope="row">{{i+1}}</td>
-                <td>{{lineItem.value.productoId}}</td>
-                <td>{{lineItem.value.nombre}}</td>
-                <td scope="row">{{lineItem.key}}</td>
+                <td>{{pedidoProducto.producto.productoId}}</td>
+                <td>{{pedidoProducto.producto.nombre}}</td>
+                <td scope="row">{{pedidoProducto.cantidad}}</td>
             </tr>
         </ng-container>
 

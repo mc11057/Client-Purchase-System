@@ -24,16 +24,20 @@
           <td>{{pedido.empleado.primerNombre}}</td>
           <td>{{pedido.progresoPedido.estadoPedido}}</td>
           <td>
-            <button type="button" class="btn btn-info" (click)="triggerModal(modalData,pedido.pedidoId)"><i class="fa fa-eye"></i></button>
+            <button type="button" class="btn btn-info" (click)="triggerModal(modalData,pedido.productos)"><i class="fa fa-eye"></i></button>
           </td>
             
             <td>
-              <button type="button" class="btn btn-success accept" (click)="aprobarPedido(pedido.pedidoId)"><i class="fa fa-check"></i></button>
+              <button type="button" class="btn btn-success accept"  [disabled]="denyAprovalClick" (click)="aprobarDenegarPedido(pedido,true);denyAprovalClick=true"><i class="fa fa-check"></i></button>
               
-              <button type="button" class="btn btn-danger" (click)="denegarPedido(pedido.pedidoId)"><i class="fa fa-close"></i></button>
+              <button type="button" class="btn btn-danger" [disabled]="denyAprovalClick" (click)="aprobarDenegarPedido(pedido,false);denyAprovalClick=true"><i class="fa fa-close"></i></button>
           </td>
         </tr>
         </ng-container>
+        <div *ngIf="sinPedidos">       
+         No hay pedidos pendientes por aprobar/denegar    
+        </div>
+        
         
       
     </tbody>
@@ -47,7 +51,7 @@
       </button>
     </div>
     <div class="modal-body">
-     <app-pedido-detail [pedidoId]="pedidoIdSelected"></app-pedido-detail>
+     <app-pedido-detail [pedidoProductos]="productosSelected"></app-pedido-detail>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Close</button>

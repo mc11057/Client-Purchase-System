@@ -13,27 +13,14 @@ import { PedidoProducto } from '../_models/pedido_producto';
 export class PedidoDetailComponent implements OnInit {
   productos : Array<Producto> = new Array();
   cantidades: Array<number> = new Array();
-  pedidoProductos : Array<PedidoProducto>;
+
   lineItems = new Map();
-  loading=true;
   
-  @Input() pedidoId: number; 
+  @Input() pedidoProductos: Array<PedidoProducto>; 
   constructor(private pedidoDetailService:PedidoDetailService) { }
 
   ngOnInit(): void {
-    this.pedidoDetailService.getProductsbyPedidoId(this.pedidoId)
-    .pipe(first())
-    .subscribe(
-        data => {         
-          this.loading=false; 
-          this.pedidoProductos = data;
-          for(let pedidoProducto of this.pedidoProductos)
-          {
-            this.lineItems.set(pedidoProducto.cantidad,pedidoProducto.producto);
-          }        
-        },
-        error => { 
-        });
+
   }
 
 }

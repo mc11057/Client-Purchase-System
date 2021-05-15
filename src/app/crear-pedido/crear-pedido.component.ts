@@ -10,7 +10,7 @@ import { Pedido } from '../_models/pedido';
 import { EmpleadoService } from '../_services/empleado.service';
 import { ApplicationUser } from '../_models/applicationuser';
 import { PedidoService } from '../_services/pedido.service';
-import {Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,10 +23,11 @@ export class CrearPedidoComponent implements OnInit {
   categoriaSelected: CategoriaProducto;
   productosPorCategoriaSeleccionada: Array<Producto>;
   pedidoProductos: Array<PedidoProducto> = new Array();
-  cantidad: number = 1;
   closeModal: string;
   loading = false;
   productosLoading = false;
+  clicked = false;
+  cantidad:number[] = [];
 
   constructor(private productoService: ProductoService,
     private categoriaService: CategoriaProductoService,
@@ -53,19 +54,20 @@ export class CrearPedidoComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+          data.forEach((element, index) => {
+            this.cantidad[index] = 1;
+          });
           this.productosPorCategoriaSeleccionada = data;
           this.productosLoading = false;
-
         },
         error => {
           console.log(error);
         });
   }
-  agregarProducto(producto: Producto) {
-    console.log(this.pedidoProductos);
+  agregarProducto(producto: Producto,index:number) {
     let pedidoProducto: PedidoProducto = new PedidoProducto();
     pedidoProducto.producto = producto;
-    pedidoProducto.cantidad = this.cantidad;
+    pedidoProducto.cantidad =  this.cantidad[index];
     if (this.pedidoProductos.length == 0) {
       this.pedidoProductos.push(pedidoProducto);
     } else {
@@ -73,20 +75,19 @@ export class CrearPedidoComponent implements OnInit {
       let addnewProduct = true;
       this.pedidoProductos.forEach((element, index) => {
         if (element.producto.productoId == producto.productoId) {
-          element.cantidad = element.cantidad + this.cantidad;
+         element.cantidad = element.cantidad + this.cantidad[index];
           pedidoProductos.push(element);
           addnewProduct = false;
         } else {
           pedidoProductos.push(element);
         }
       });
-      if(addnewProduct) pedidoProductos.push(pedidoProducto);
+      if (addnewProduct) pedidoProductos.push(pedidoProducto);
       this.pedidoProductos = pedidoProductos;
-
     }
-
-
+    this.cantidad[index] = 1;
   }
+
   eliminarProducto(pedidoProducto: PedidoProducto) {
 
     let pedidoProductos: Array<PedidoProducto> = new Array();
@@ -118,8 +119,9 @@ export class CrearPedidoComponent implements OnInit {
   }
   crearPedido() {
     this.loading = true;
-    let pedido: Pedido = new Pedido;
+    let pedido: Pedido = new Pedido();
     pedido.productos = this.pedidoProductos;
+    this.pedidoProductos = new Array();//clean the shopping car
     let user: ApplicationUser = JSON.parse(localStorage.getItem('currentUser')!);
     this.empleadoService.getEmployeeByUserID(user.id)
       .pipe(first())

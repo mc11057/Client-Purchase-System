@@ -1,0 +1,93 @@
+<p>Seleccione el proveedor </p>
+<div class="dropdown">
+    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        Proveedor
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <ng-container *ngFor="let proveedor of proveedores;">
+            <li><a class="dropdown-item" (click)="proveedorSelecteccionado(proveedor)">{{proveedor.nombre}}</a></li>
+        </ng-container>
+    </ul>
+</div>
+
+<p>Seleccione el producto</p>
+
+<div class="dropdown">
+    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        Producto
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+        <ng-container *ngFor="let producto of productos;">
+            <li><a class="dropdown-item" (click)="productoSelecteccionado(producto)">{{producto.nombre}}</a></li>
+        </ng-container>
+    </ul>
+</div>
+
+<div *ngIf="proveedorSelected">Proveedor Seleccionado: {{proveedorSelected.nombre}}</div>
+<div *ngIf="productoSelected">Producto Seleccionado: {{productoSelected.nombre}}</div>
+<div *ngIf="allFieldsSelected">
+    <p>Precio en dólares: $</p>
+    <input class="form-control" [(ngModel)]="precio" type="number" min="1" [value]="1" (ngModelChange)="onChange($event)">
+    <button type="button" class="btn btn-success acept" [disabled]="!precioSeleccionado" (click)="agregar()">
+        Agregar
+    </button>
+</div>
+
+
+<div *ngIf="productoProveedor">
+    <p>Producto a registrar</p>
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th scope="col">Nombre del Producto</th>
+                <th scope="col">Nombre del Proveedor</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Remover</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+
+                <td>{{productoProveedor?.producto?.nombre}}</td>
+                <td>{{productoProveedor?.proveedor?.nombre}}</td>
+                <td>{{productoProveedor?.precio}}</td>
+                <td>
+                    <button type="button" class="btn btn-danger" (click)="eliminarProductoProveedor()"><i
+                            class="fa fa-close"></i></button>
+                </td>
+            </tr>
+
+
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-primary" (click)="triggerModal(modalData)">Registrar Producto</button>
+
+</div>
+
+<ng-template #modalData let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">¿Confirma registra el producto?</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <button type="button" class="btn btn-success acept" [disabled]="clicked"
+            (click)="registrarProducto(); clicked = true">
+            Aceptar
+        </button>
+        <button type="button" class="btn btn-danger cancel" [disabled]="clicked"
+            (click)="modal.close('Save click')">Cancelar</button>
+        <div *ngIf="loading" class="spinner-border text-success" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" [disabled]="clicked"
+            (click)="modal.close('Save click')">Close</button>
+    </div>
+</ng-template>

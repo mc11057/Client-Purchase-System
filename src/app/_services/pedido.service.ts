@@ -25,18 +25,20 @@ guardarPedido(pedido:Pedido) {
       }));
 }
 
-aprobarPedido(pedidoId: number){
-  return this.http.put<any>(`${environment.apiUrl}/app/v1/pedido/aprobar/${pedidoId}`, pedidoId)
-  .pipe(map(response => {
-    return response;  
-}));
-}
+aprobarDenegarPedido(pedido: Pedido,aprovar:boolean){
+  if(aprovar)
+  {
+    return this.http.put<any>(`${environment.apiUrl}/app/v1/pedido/aprobar`, pedido)
+    .pipe(map(response => {
+      return response;  
+  }));
+  }//else
+   return this.http.put<any>(`${environment.apiUrl}/app/v1/pedido/denegar`, pedido)
+    .pipe(map(response => {
+      return response;  
+  }));
+  
 
-denegarPedido(pedidoId: number){
-  return this.http.put<any>(`${environment.apiUrl}/app/v1/pedido/denegar/`, pedidoId)
-  .pipe(map(response => {
-    return response;  
-}));
 }
 
 

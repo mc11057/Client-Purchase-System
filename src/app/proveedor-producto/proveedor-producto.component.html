@@ -1,0 +1,34 @@
+<hr>
+<h1>Registrar precio de productos de proveedores</h1>
+<div *ngIf="loading" class="spinner-border text-info" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="d-flex justify-content-end"> 
+<button type="button" class="btn btn-primary" (click)="registrarProducto()"><span class="btn-label"><i class="fa fa-plus" ></i></span> Registrar Producto</button>
+</div>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Proveedor</th>
+        <th scope="col">Precio</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        <ng-container *ngFor="let productoProveedor of productosProveedores;let i=index;">
+        <tr>
+          <td scope="row">{{i+1}}</td>
+          <td>{{productoProveedor.producto.nombre}}</td>
+          <td>{{productoProveedor.proveedor.nombre}}</td>
+          <td> {{productoProveedor.precio}}</td>    
+
+        </tr>
+        </ng-container>
+        <div *ngIf="sinProductoProveedor">       
+         No hay productos registrados   
+        </div>       
+      
+    </tbody>
+  </table>

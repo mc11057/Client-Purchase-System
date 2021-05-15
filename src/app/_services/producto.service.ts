@@ -18,4 +18,10 @@ export class ProductoService {
             return producto;  
         }));
 }
+getAll() {
+  return this.http.get<Array<Producto>>(`${environment.apiUrl}/app/v1/producto` )
+      .pipe(map(producto => {
+          return producto;  
+      }));
+}
 }

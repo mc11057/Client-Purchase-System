@@ -18,6 +18,8 @@ import { PedidoDetailComponent } from './pedido-detail/pedido-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CrearPedidoComponent } from './crear-pedido/crear-pedido.component';
 import { FormsModule } from '@angular/forms';
+import { ProveedorProductoComponent } from './proveedor-producto/proveedor-producto.component';
+import { CrearProductoProveedorComponent } from './crear-producto-proveedor/crear-producto-proveedor.component';
 
 
 
@@ -40,7 +42,9 @@ import { FormsModule } from '@angular/forms';
       LoginComponent,
       PedidoComponent,
       PedidoDetailComponent,
-      CrearPedidoComponent
+      CrearPedidoComponent,
+      ProveedorProductoComponent,
+      CrearProductoProveedorComponent
   ],
   providers: [
       { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
