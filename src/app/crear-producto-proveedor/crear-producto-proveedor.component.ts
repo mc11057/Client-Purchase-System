@@ -22,13 +22,12 @@ export class CrearProductoProveedorComponent implements OnInit {
   productos: Array<Producto> = new Array();
   proveedorSelected: Proveedor;
   productoSelected: Producto;
-  allFieldsSelected = false;
   productoProveedor: any;
   closeModal: string;
   clicked = false;
   loading = false;
   precio: number;
-  precioSeleccionado = false;
+  mostrarBotonAgregar = false;
 
   constructor(private productoService: ProductoService,
     private proveedorService: ProveedorService,
@@ -54,14 +53,7 @@ export class CrearProductoProveedorComponent implements OnInit {
         error => {
         });
   }
-  proveedorSelecteccionado(proveedor: Proveedor) {
-    this.proveedorSelected = proveedor;
-    if (this.productoSelected) { this.allFieldsSelected = true }
-  }
-  productoSelecteccionado(producto: Producto) {
-    this.productoSelected = producto;
-    if (this.proveedorSelected) { this.allFieldsSelected = true }
-  }
+ 
 
   triggerModal(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((res) => {
@@ -80,9 +72,13 @@ export class CrearProductoProveedorComponent implements OnInit {
     }
   }
   onChange(newValue) {
-    if(newValue>0) { this.precioSeleccionado = true;}  
-    else { this.precioSeleccionado =false; } 
+    if(newValue>0 && this.proveedorSelected && this.productoSelected) { this.mostrarBotonAgregar = true;}  
+    else { this.mostrarBotonAgregar =false; } 
   
+  }
+  onChangeSelect(){
+    if(this.precio > 0 && this.proveedorSelected && this.productoSelected) { this.mostrarBotonAgregar = true;}  
+    else { this.mostrarBotonAgregar =false; } 
   }
   agregar() {
 

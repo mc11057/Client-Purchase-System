@@ -20,6 +20,8 @@ import { CrearPedidoComponent } from './crear-pedido/crear-pedido.component';
 import { FormsModule } from '@angular/forms';
 import { ProveedorProductoComponent } from './proveedor-producto/proveedor-producto.component';
 import { CrearProductoProveedorComponent } from './crear-producto-proveedor/crear-producto-proveedor.component';
+import { FacturaOrdenPagoComponent } from './factura-orden-pago/factura-orden-pago.component';
+import { PagarFacturaOrdenPagoComponent } from './pagar-factura-orden-pago/pagar-factura-orden-pago.component';
 
 
 
@@ -44,7 +46,9 @@ import { CrearProductoProveedorComponent } from './crear-producto-proveedor/crea
       PedidoDetailComponent,
       CrearPedidoComponent,
       ProveedorProductoComponent,
-      CrearProductoProveedorComponent
+      CrearProductoProveedorComponent,
+      FacturaOrdenPagoComponent,
+      PagarFacturaOrdenPagoComponent
   ],
   providers: [
       { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

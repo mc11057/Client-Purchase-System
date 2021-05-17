@@ -46,11 +46,9 @@ export class CrearPedidoComponent implements OnInit {
         error => {
         });
   }
-  categoriaSeleccionada(categoriaId: number) {
+  onChangeSelect() {
     this.productosLoading = true;
-    let categoriaFounded = this.categorias.find(categoria => categoria.categoriaProductoId == categoriaId);
-    this.categoriaSelected = categoriaFounded!;
-    this.productoService.findByCategory(categoriaId)
+    this.productoService.findByCategory(this.categoriaSelected.categoriaProductoId)
       .pipe(first())
       .subscribe(
         data => {

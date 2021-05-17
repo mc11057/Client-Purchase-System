@@ -1,18 +1,12 @@
-<p>Seleccione la categoría</p>
-<div class="dropdown">
-    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-        aria-expanded="false">
-        Categoría
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <ng-container *ngFor="let categoria of categorias;">
-            <li><a class="dropdown-item"
-                    (click)="categoriaSeleccionada(categoria.categoriaProductoId)">{{categoria.nombre}}</a></li>
-        </ng-container>
-    </ul>
+<hr>
+<h2>Crear Pedido</h2>
+<div class="form-floating mb-3">
+    <select class="form-select" id="floatingSelect" [(ngModel)]="categoriaSelected"
+        aria-label="Floating label select example" (ngModelChange)="onChangeSelect()">
+        <option *ngFor="let categoria of categorias;" [ngValue]="categoria" >{{categoria.nombre}}</option>
+    </select>
+    <label for="floatingSelect">Seleccione la categoría</label>
 </div>
-<div *ngIf="categoriaSelected">Categoría Seleccionada: {{categoriaSelected.nombre}}</div>
-
 <div *ngIf="productosLoading" class="spinner-border text-info" role="status">
     <span class="visually-hidden">Loading...</span>
 </div>

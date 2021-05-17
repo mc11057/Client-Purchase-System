@@ -1,0 +1,16 @@
+<div class="form-floating mb-3">
+    <select class="form-select" id="floatingSelect" [(ngModel)]="formaDePagoSelected"
+        aria-label="Floating label select example" (ngModelChange)="onChangeSelect()">
+        <option *ngFor="let formaDePago of formasDePago;" [ngValue]="formaDePago" >{{formaDePago.nombre}}</option>
+    </select>
+    <label for="floatingSelect">Seleccione la forma de pago</label>
+</div>
+<p>Digite el monto  $</p>
+<div class="input-group mb-3">
+    <span class="input-group-text">$</span>
+  <input type="text" class="form-control" aria-label="Monto"  [(ngModel)]="monto" type="number" min="1"  (ngModelChange)="onChangeSelect()">
+  <span class="input-group-text">.00</span>
+</div>
+<button type="button" class="btn btn-success acept" [disabled]="!mostrarBotonAgregar" (click)="agregar()">
+    Agregar
+</button>
