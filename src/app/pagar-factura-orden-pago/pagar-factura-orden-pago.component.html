@@ -1,3 +1,4 @@
+<p>Monto Total: {{factura.monto|currency}}</p> <p>Restante: {{factura.monto-totalSelected|currency}}</p>
 <div class="form-floating mb-3">
     <select class="form-select" id="floatingSelect" [(ngModel)]="formaDePagoSelected"
         aria-label="Floating label select example" (ngModelChange)="onChangeSelect()">
@@ -8,9 +9,37 @@
 <p>Digite el monto  $</p>
 <div class="input-group mb-3">
     <span class="input-group-text">$</span>
-  <input type="text" class="form-control" aria-label="Monto"  [(ngModel)]="monto" type="number" min="1"  (ngModelChange)="onChangeSelect()">
-  <span class="input-group-text">.00</span>
+  <input type="number" class="form-control" aria-label="Monto"  [(ngModel)]="monto" type="number" min="1"  (ngModelChange)="onChangeSelect()">
 </div>
 <button type="button" class="btn btn-success acept" [disabled]="!mostrarBotonAgregar" (click)="agregar()">
     Agregar
 </button>
+<table class="table" *ngIf="this.pagos.length>0">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Forma de Pago</th>
+        <th scope="col">Monto</th>
+        <th scope="col">Eliminar</th>
+        
+      </tr>
+    </thead>
+    <tbody>   
+        <ng-container *ngFor="let pago of pagos; let i=index;">
+        <tr>
+          <td>{{i+1}}</td>
+          <td>{{pago.formaPagoId.nombre}}</td>
+          <td>{{pago.monto}}</td>         
+            <td>
+              <button type="button" class="btn btn-danger"  (click)="eliminar(pago)"><i class="fa fa-close"></i></button>         
+          </td>
+        </tr>
+        </ng-container>
+    </tbody>
+  </table>
+<button type="button" class="btn btn-primary" *ngIf="ejecutarPagos" (click)="guardarPagos()">
+    Pagar
+</button>
+<div *ngIf="loading" class="spinner-border text-info" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>

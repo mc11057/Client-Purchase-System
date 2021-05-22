@@ -4,7 +4,9 @@ export class FacturaOrdenPago {
     facturaOrdenPagoId:number;
     fechaEmision: Date;
     numeroFactura: number;
-    pedidoProveedorId:PedidoProveedor
+    pedidoProveedorId:PedidoProveedor;
+    estadoFactura: string;
+    monto:number;
 
 
 }

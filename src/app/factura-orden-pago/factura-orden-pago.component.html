@@ -9,6 +9,7 @@
         <th scope="col"># de Pedido</th>
         <th scope="col">Proveedor</th>
         <th scope="col">Número de Factura</th>
+        <th scope="col">Monto</th>
         <th scope="col">Fecha de emisión mm/dd/aaaa</th>
         <th scope="col">Pagar</th>
       </tr>
@@ -19,6 +20,7 @@
           <td>{{factura.pedidoProveedorId.ordenCompraId.pedidoId.pedidoId}}</td>
           <td>{{factura.pedidoProveedorId.proveedorId.nombre}}</td>
           <td>{{factura.numeroFactura}}</td>
+          <td>{{factura.monto | currency}}</td>
           <td>{{factura.fechaEmision |date:'shortDate'}}</td>            
             <td>
               <button type="button" class="btn btn-success accept"  (click)="triggerModal(modalData,factura)"><i class="fa fa-dollar"></i></button>         

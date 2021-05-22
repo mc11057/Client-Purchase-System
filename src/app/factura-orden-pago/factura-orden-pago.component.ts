@@ -3,6 +3,7 @@ import { FacturaOrdenPago } from '../_models/factura_orden_pago';
 import { FacturaOrdenPagoService } from '../_services/factura-orden-pago.service';
 import { first } from 'rxjs/operators';
 import { NgbModal,ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-factura-orden-pago',
   templateUrl: './factura-orden-pago.component.html',
@@ -16,14 +17,15 @@ export class FacturaOrdenPagoComponent implements OnInit {
   closeModal: string;
   facturaSelected:FacturaOrdenPago;
   constructor(private facturaOrdenPagoService:FacturaOrdenPagoService,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal) { 
+
+    }
 
   ngOnInit(): void {
     this.loading = true;
     this.facturaOrdenPagoService.getAll().pipe(first())
     .subscribe(
       data => {
-        console.log(data);
         this.loading = false;
         if (data.length > 0) { this.sinFacturas = false; }
         this.facturas = data;
